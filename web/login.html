@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+<title>登陆</title>  
+<script type="text/javascript" src="jquery.min.js"></script>  
+<link href="login.css" rel="stylesheet" type="text/css">
+</head>
+  
+
+<body>
+<div class="wrapper">
+<div class="header">登陆<span>Login</span></div>
+<form action="loginServlet" method="post">
+	<ul>
+    	<li>
+ 	        <div class="text">
+ 	            <span class="yonghu"></span><input id="name" type="text" name="name" placeholder="请输入用户名">
+  	        </div>
+        </li>
+        <li>
+            <div class="password">
+                <span class="mima"></span><input id="password" type="password" name="password" placeholder="请输入密码"> 
+            </div>
+        </li>
+        
+        <li>
+            <input type="submit" value="登陆" id="sender">
+        </li>
+    </ul>
+</form>
+</div>
+	<script>  
+    $('#sendee').click(function(){  
+        var name=document.getElementById('name').value;  
+        var password=document.getElementById('password').value;  
+        var hero={"name":name,"password":password};  
+        var url="login";  
+        $.post(
+                url,
+                {"name":name,"password":password},
+                function(data,status){
+            	    alert("Data: " + data + "\nStatus: " + status);
+            	  });
+                
+ 
+    });  
+			    //
+			    //function(data) { 
+			    //            	$("#messageDiv").html(data);
+			    //           	var json=JSON.parse(data);  
+			    //             var res =json.res;  
+			    //           if(res=="success"){
+			    //         	$(".wrapper").html(json.reshtml);
+			    //       }else{
+			    //     	alert(res);
+			    //	}
+                	//$("#res").attr("text","right");
+                    //$("#result").html(res);
+                    //$("#messageDiv").html("英雄名称："+name + "<br>英雄血量:" +hp );
+        		// });   
+    </script> 
+
+	
+</body>
+</html>
+
+
