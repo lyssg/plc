@@ -75,6 +75,7 @@ alert("版本已存在");
 	    				<td>类型</td>
 	    				<td><select id="type" name="type" class="form-control">
 							   <option>乐江智能缝纫机</option>
+							   <option>南邦智能缝纫机</option>
 							</select>
 						</td>
 	    			</tr>

@@ -23,6 +23,8 @@ public class ApkFileServlet extends BaseServlet {
 		int type=0;
 		if(params.get("type").equals("乐江智能缝纫机")) {
 			type=1;
+		}else if(params.get("type").equals("南邦智能缝纫机")) {
+			type=2;
 		}
 		int version= Integer.parseInt(params.get("version"));
 		if(apkfileDAO.checkVersionExist(type,version)) {
@@ -39,7 +41,12 @@ public class ApkFileServlet extends BaseServlet {
 		apkfileDAO.add(apkfile);
 		
 		File  imageFolder= new File(request.getSession().getServletContext().getRealPath("file/apk"));
-		File file = new File(imageFolder,apkfile.getId()+".apk");
+		File file;
+		if(type==1) {
+			file = new File(imageFolder,"lj"+apkfile.getId()+".apk");
+		}else {
+			file = new File(imageFolder,"nb"+apkfile.getId()+".apk");
+		}
 		
 		try {
 			if(null!=is && 0!=is.available()){
@@ -69,9 +76,15 @@ public class ApkFileServlet extends BaseServlet {
 	
 	public String delete(HttpServletRequest request, HttpServletResponse response, Page page) {
 		int id = Integer.parseInt(request.getParameter("id"));
+		int type=apkfileDAO.getTypeById(id);
 		apkfileDAO.delete(id);
 		File  imageFolder= new File(request.getSession().getServletContext().getRealPath("file/apk"));
-		File file = new File(imageFolder,id+".apk");
+		File file;
+		if(type==1) {
+			file = new File(imageFolder,"lj"+id+".apk");
+		}else {
+			file = new File(imageFolder,"nb"+id+".apk");
+		}
 		file.delete();
 		return "@admin_apkfile_list";
 	}

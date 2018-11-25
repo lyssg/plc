@@ -219,4 +219,46 @@ public class ApkFileDAO {
         }
     	return true;
     }
+    
+    public int getMaxVersionId(int type) {
+    	int id=0;
+    	int maxversion=0;
+    	int nowversion=0;
+    	try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+            String sql = "select * from apkfile where type=" + type;
+            ResultSet rs = s.executeQuery(sql);
+  
+            while (rs.next()) {
+            	nowversion=rs.getInt("version");
+            	id=rs.getInt("id");
+            	System.out.println("nowversion:"+nowversion+"   maxversion:"+maxversion);
+            	System.out.println();
+            	if(nowversion>maxversion) { 
+            		System.out.println("update "+"nowversion:"+nowversion+"   maxversion:"+maxversion);
+            		maxversion=nowversion;
+            		
+            	}
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return id;
+    	
+    }
+    
+    public int getTypeById(int id) {
+    	int type=0;
+    	try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+            String sql = "select * from apkfile where id=" + id;
+            ResultSet rs = s.executeQuery(sql);
+  
+            while (rs.next()) {
+            	type=rs.getInt("type");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return type;
+    	
+    }
 }

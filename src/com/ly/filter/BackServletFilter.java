@@ -30,7 +30,7 @@ public class BackServletFilter implements Filter {
 		String uri = request.getRequestURI();
 		System.out.println("uri is:"+uri);
 		
-		if(uri.endsWith("login.html")||uri.endsWith("loginServlet")||uri.endsWith(".css")||uri.endsWith(".js")) {
+		if(uri.endsWith("login.html")||uri.endsWith("loginServlet")||uri.endsWith(".css")||uri.endsWith(".js")||uri.endsWith("downloadlj")||uri.endsWith("downloadnb")) {
 			chain.doFilter(request, response);
 			return;
 		}
